@@ -24,7 +24,7 @@ resource "unifi_network" "workhome" {
   vlan_id      = 200
   dhcp_start   = "192.168.200.10"
   dhcp_stop    = "192.168.200.250"
-  dhcp_dns     = ["192.168.1.1", "192.168.1.55"]
+  dhcp_dns     = ["192.168.201.49", "192.168.1.1"]
   dhcp_enabled = true
 }
 
@@ -36,7 +36,7 @@ resource "unifi_network" "server" {
   vlan_id      = 201
   dhcp_start   = "192.168.201.10"
   dhcp_stop    = "192.168.201.250"
-  dhcp_dns     = ["192.168.1.1", "192.168.1.55"]
+  dhcp_dns     = ["192.168.201.49", "192.168.1.1"]
   dhcp_enabled = true
 }
 
