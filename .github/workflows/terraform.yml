@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   terraform:
+    runs-on: self-hosted
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
