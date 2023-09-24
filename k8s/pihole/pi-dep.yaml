@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole-dep
+  labels:
+    app: pihole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole
+  template: 
+    metadata:
+      labels:
+        app: pihole
+    spec:
+      containers:
+      - name: pihole
+        image: pihole/pihole:latest
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        - containerPort: 53
+        - containerPort: 53
+          protocol: UDP
+        volumeMounts:
+          - name: pi-app-pv
+            mountPath: /etc/pihole
+          - name: pi-dnsmasq-pv
+            mountPath: /etc/dnsmasq.d
+          - name: pi-dns-list
+            mountPath: /etc/pihole/custom.list
+            subPath: test
+      volumes:
+      - name: pi-app-pv
+        persistentVolumeClaim:
+          claimName: pi-app-pvc
+      - name: pi-dnsmasq-pv
+        persistentVolumeClaim:
+          claimName: pi-dnsmasq-pvc
+      - name: pi-dns-list
+        configMap:
+          name: pi-dns-list
