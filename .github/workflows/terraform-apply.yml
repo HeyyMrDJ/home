@@ -1,10 +1,5 @@
 name: 'Terraform Apply'
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-
 env:
   ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
   TF_VAR_GUESTWIFIPASS: ${{ secrets.TF_VAR_GUESTWIFIPASS }}
