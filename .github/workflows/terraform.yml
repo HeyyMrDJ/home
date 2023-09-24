@@ -11,6 +11,9 @@ env:
   TF_VAR_GUESTWIFISSID: ${{ secrets.TF_VAR_GUESTWIFISSID }}
   TF_VAR_HOMEWIFIPASS: ${{ secrets.TF_VAR_HOMEWIFIPASS }}
   TF_VAR_HOMEWIFISSID: ${{ secrets.TF_VAR_HOMEWIFISSID }}
+  UNIFI_API: ${{ secrets.UNIFI_API }}
+  UNIFI_USERNAME: ${{ secrets.UNIFI_USERNAME }}
+  UNIFI_PASSWORD: ${{ secrets.UNIFI_PASSWORD }}
       
 
 jobs:
