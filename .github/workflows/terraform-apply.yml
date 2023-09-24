@@ -1,5 +1,7 @@
 name: 'Terraform Apply'
 
+on: [workflow_dispatch]
+
 env:
   ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
   TF_VAR_GUESTWIFIPASS: ${{ secrets.TF_VAR_GUESTWIFIPASS }}
