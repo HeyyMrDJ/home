@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
    name: blackbox-cm
 data:
-   test: |
+   blackbox.yml: |
       modules:
         http_2xx:
           prober: http
