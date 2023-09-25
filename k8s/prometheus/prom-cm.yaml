@@ -110,7 +110,8 @@ data:
           module: [http_2xx]
         static_configs:
           - targets:
-            - https://www.google.com
+            - name: google.com
+              url: https://google.com
         relabel_configs:
           # ... Relabel configurations ...
         metric_relabel_configs:
