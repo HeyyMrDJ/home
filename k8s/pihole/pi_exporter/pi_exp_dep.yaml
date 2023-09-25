@@ -21,9 +21,9 @@ spec:
         - containerPort: 9617
         env:
         - name: PIHOLE_HOSTNAME
-          value: "pi-svc.default.svc.cluster.local"
+          value: "pi-svc.monitoring.svc.cluster.local"
         - name: PIHOLE_PASSWORD
-          value: "pi1ME00@@"
+          value: "6AWJj_NG"
         - name: PORT
           value: "9617"
         - name: PIHOLE_PORT
