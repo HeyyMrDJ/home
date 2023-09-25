@@ -23,7 +23,7 @@ spec:
         - name: PIHOLE_HOSTNAME
           value: "pi-svc.monitoring.svc.cluster.local"
         - name: PIHOLE_PASSWORD
-          value: "6AWJj_NG"
+          value: "JEltYzo_"
         - name: PORT
           value: "9617"
         - name: PIHOLE_PORT
