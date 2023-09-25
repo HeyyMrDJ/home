@@ -30,7 +30,7 @@ data:
         scrape_interval: 5s
 
         static_configs:
-          - targets: ['localhost:9090', 'pi-exp-svc:9617']
+          - targets: ['localhost:9090']
 
       - job_name: 'node-exporter'
         kubernetes_sd_configs:
@@ -38,6 +38,22 @@ data:
         relabel_configs:
         - source_labels: [__meta_kubernetes_endpoints_name]
           regex: 'node-exporter'
+          action: keep
+
+      - job_name: 'pihole-exp'
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_endpoints_name]
+          regex: 'pi-exp-svc'
+          action: keep
+
+      - job_name: 'traefik-dashboard'
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_endpoints_name]
+          regex: 'my-traefik-dashboard'
           action: keep
 
       - job_name: 'argo'
