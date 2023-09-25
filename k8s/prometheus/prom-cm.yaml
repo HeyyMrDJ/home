@@ -112,6 +112,8 @@ data:
         static_configs:
           - targets:
             - https://www.google.com
+            - https://192.168.1.1
+            - https://192.168.1.69
         relabel_configs:
           - source_labels: [__address__]
             target_label: __param_target
