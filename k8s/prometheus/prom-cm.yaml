@@ -30,7 +30,7 @@ data:
         scrape_interval: 5s
 
         static_configs:
-          - targets: ['localhost:9090']
+          - targets: ['localhost:9090', 'pi-exp-svc:9617']
 
       - job_name: 'node-exporter'
         kubernetes_sd_configs:
