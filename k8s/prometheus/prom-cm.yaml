@@ -104,17 +104,18 @@ data:
           regex: (.+)
           target_label: __metrics_path__
           replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
-      - job_name: 'blackbox'
+
+      - job_name: 'blackbox-external-targets'
         metrics_path: /probe
         params:
           module: [http_2xx]
         static_configs:
           - targets:
-            - name: google.com
-              url: https://google.com
+            - https://www.google.com
         relabel_configs:
-          # ... Relabel configurations ...
-        metric_relabel_configs:
-          - source_labels: [__name__]
-            regex: 'probe_duration_seconds'
-            action: keep
+          - source_labels: [__address__]
+            target_label: __param_target
+          - source_labels: [__param_target]
+            target_label: instance
+          - target_label: __address__
+            replacement: prom-svc.monitoring:9115
