@@ -61,6 +61,14 @@ data:
           - role: endpoints
         relabel_configs:
         - source_labels: [__meta_kubernetes_endpoints_name]
+          regex: 'argocd-metrics'
+          action: keep
+
+      - job_name: 'argo-server'
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_endpoints_name]
           regex: 'argocd-server-metrics'
           action: keep
 
