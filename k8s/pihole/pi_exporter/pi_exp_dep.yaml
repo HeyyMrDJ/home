@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole-exp-dep
+  labels:
+    app: pihole-exp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole-exp
+  template: 
+    metadata:
+      labels:
+        app: pihole-exp
+    spec:
+      containers:
+      - name: pihole-exp
+        image: ekofr/pihole-exporter:latest
+        ports:
+        - containerPort: 9617
+        env:
+        - name: PIHOLE_HOSTNAME
+          value: "pi-svc.default.svc.cluster.local"
+        - name: PIHOLE_PASSWORD
+          value: "pi1ME00@@"
+        - name: PORT
+          value: "9617"
+        - name: PIHOLE_PORT
+          value: "8081"

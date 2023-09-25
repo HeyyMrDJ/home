@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-exp-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: pihole-exp
+  ports:
+    - protocol: TCP
+      name: web
+      port: 9617
+      targetPort: 9617
