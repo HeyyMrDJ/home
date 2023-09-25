@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom-dep
+  labels:
+    app: prometheus
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: docker.io/prom/prometheus
+        args:
+        - --web.enable-lifecycle
+        - --config.file=/etc/prometheus/prometheus.yml
+        - --storage.tsdb.path=/prometheus
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+            - name: prom-config-volume
+              mountPath: /etc/prometheus/
+            - name: prom-pv
+              mountPath: /prometheus
+      - name: watch
+        image: weaveworks/watch:master-5b2a6e5
+        imagePullPolicy: IfNotPresent
+        args: ["-v", "-t", "-p=/etc/prometheus", "curl", "-X", "POST", "--fail", "-o", "-", "-sS", "http://localhost:9090/-/reload"]
+        volumeMounts:
+        - name: prom-config-volume
+          mountPath: /etc/prometheus
+      volumes:
+        - name: prom-config-volume
+          configMap:
+            defaultMode: 420
+            name: prom-cm
+        - name: prom-pv
+          persistentVolumeClaim:
+            claimName: prom-pvc
+      serviceAccountName: prometheus-sa
